@@ -59,18 +59,13 @@ module.exports = {
         console.log(req.session)
 
     },
-    getUser: async (req, res) => {
-        console.log(req.session.user)
-        // const {user} = req.session
-        // if(!user){
-        //     return res.status(404)
-        // }
+    getUser:  (req, res) => {
+        const {user} = req.session
+        if (!user){
+            return res.status(404).send('you are not login')
+        }
 
-        // // const userInfo = await req.db.user.finder
-
-        // console.log(req.session)
-        // res.status(200).send('good job')
-
+        res.status(200).send(user)
         }
     }
 
