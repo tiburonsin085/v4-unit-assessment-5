@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import logo from './../../assets/helo_logo.png';
-import Dash from '../Dash/Dash'
+import { connect } from 'react-redux'
+import { updateUser } from '../../redux/reducer'
 import './Auth.css';
 
 class Auth extends Component {
@@ -23,7 +24,11 @@ class Auth extends Component {
   }
 
   login() {
-    axios.post('/api/auth/login', this.state)
+    axios.post('/api/auth/login',{
+      username:this.state.username,
+      password: this.state.password
+      
+    })
       .then(res => {
         //code here
         this.props.history.push('/dash')
@@ -80,4 +85,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+export default connect (null, {updateUser}) (Auth);
